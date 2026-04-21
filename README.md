@@ -63,7 +63,7 @@ capstone-project1/
 
 - OpenStack: Keystone, Glance, Nova, Neutron, Placement
 - GPU 할당: PCIe Passthrough (VFIO)
-- 커널: 6.17.0 (HWE)
+- 커널: 6.8.0-110-generic
 
 ### 참고 사항
 
@@ -107,7 +107,7 @@ capstone-project1/
 
 ### Benchmark Tool
 
-[![benchmarks](https://img.shields.io/badge/📁%20benchmarks-explore-blue)](./benchmarks)
+[![benchmarks](https://img.shields.io/badge/📁%20benchmarks-blue)](./benchmarks)
 
 ### Infrastructure
 
@@ -119,7 +119,7 @@ capstone-project1/
 
 - OpenStack: Keystone, Glance, Nova, Neutron, Placement
 - GPU allocation: PCIe Passthrough (VFIO)
-- Kernel: 6.17.0 (HWE)
+- Kernel: 6.8.0-110-generic
 
 ### Notes
 
