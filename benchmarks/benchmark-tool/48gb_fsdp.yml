@@ -44,7 +44,7 @@ train_on_inputs: false
 datasets:
   - path: synthetic
     type: _synthetic
-    length: 200
+    length: 320
     sequence_length: 20480
 
 # ── Checkpointing ────────────────────────────────────────

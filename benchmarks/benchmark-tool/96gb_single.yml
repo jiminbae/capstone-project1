@@ -2,8 +2,8 @@ base_model: /workspace/model
 tokenizer_config: /workspace/model
 special_tokens:
   pad_token: "<|end_of_text|>"
-dataset_prepared_path: /workspace/cache/48gb_cache
-output_dir: /workspace/final-result/48gb/out-expansive-48gb-v1
+dataset_prepared_path: /workspace/cache/96gb_cache
+output_dir: /workspace/final-result/96gb/out-expansive-96gb-v1
 
 adapter: qlora
 load_in_4bit: true
@@ -20,7 +20,7 @@ lora_embedding_kernel: false
 
 # LoRA Settings
 lora_r: 64
-lora_alpha: 16
+lora_alpha: 32
 lora_dropout: 0.05
 lora_target_linear: true
 
@@ -28,24 +28,22 @@ lora_target_linear: true
 sequence_len: 20480
 pad_to_sequence_len: true
 sample_packing: false
-micro_batch_size: 1
-gradient_accumulation_steps: 16
-eval_batch_size: 1
+micro_batch_size: 2
+gradient_accumulation_steps: 8
+eval_batch_size: 2
 
 # Training Settings
 max_steps: 20
 learning_rate: 0.0002
-optimizer: paged_adamw_32bit
+optimizer: adamw_torch_fused
 train_on_inputs: false
 
 # Dataset Settings
 datasets:
   - path: synthetic
     type: _synthetic
-    length: 200
+    length: 320
     sequence_length: 20480
 
 # Checkpointing
 gradient_checkpointing: true
-gradient_checkpointing_kwargs:
-  use_reentrant: true
