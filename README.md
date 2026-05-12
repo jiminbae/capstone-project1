@@ -59,7 +59,7 @@ capstone-project1/
 |---|---|---|---|
 | user-Super-Server | OpenStack 컨트롤러 | - | Ubuntu 24.04 |
 | compute1 | compute 노드 | RTX PRO 6000 Blackwell 96GB × 1 | Ubuntu 24.04 |
-| compute2 | compute 노드 | RTX A6000 48GB × 4 | Ubuntu 24.04 |
+| compute2 | compute 노드 | RTX 6000 Ada Generation 48GB × 4 | Ubuntu 24.04 |
 
 - OpenStack: Keystone, Glance, Nova, Neutron, Placement
 - GPU 할당: PCIe Passthrough (VFIO)
@@ -115,7 +115,7 @@ capstone-project1/
 |---|---|---|---|
 | user-Super-Server | OpenStack Controller | - | Ubuntu 24.04 |
 | compute1 | Compute Node | RTX PRO 6000 Blackwell 96GB × 1 | Ubuntu 24.04 |
-| compute2 | Compute Node | RTX A6000 48GB × 4 | Ubuntu 24.04 |
+| compute2 | Compute Node | RTX 6000 Ada Generation 48GB × 4 | Ubuntu 24.04 |
 
 - OpenStack: Keystone, Glance, Nova, Neutron, Placement
 - GPU allocation: PCIe Passthrough (VFIO)
