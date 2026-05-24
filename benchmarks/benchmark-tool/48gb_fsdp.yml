@@ -1,15 +1,17 @@
+# ── 기본 설정 ────────────────────────────────────────────
 base_model: /workspace/model
 tokenizer_config: /workspace/model
 special_tokens:
   pad_token: "<|end_of_text|>"
 dataset_prepared_path: /workspace/cache/48gb_fsdp_cache
-output_dir: /workspace/final-result/48gb_fsdp/out-expansive-48gb-fsdp-v1
+output_dir: /workspace/final-result/48gb_fsdp/out-cheap-48gb-fsdp-v1
 
+# ── 모델 로드 및 어댑터 설정 ──────────────────────────────
 adapter: qlora
 load_in_4bit: true
 load_in_8bit: false
 
-# Hardware & Kernel Settings
+# ── 하드웨어 및 커널 설정 ─────────────────────────────────
 bf16: true
 tf32: true
 flash_attention: true
@@ -18,13 +20,13 @@ lora_o_kernel: false
 lora_mlp_kernel: false
 lora_embedding_kernel: false
 
-# LoRA Settings
-lora_r: 64
+# ── LoRA 설정 ─────────────────────────────────────────────
+lora_r: 32
 lora_alpha: 16
 lora_dropout: 0.05
 lora_target_linear: true
 
-# Sequence & Batch Settings
+# ── 시퀀스 및 배치 설정 ───────────────────────────────────
 sequence_len: 20480
 pad_to_sequence_len: true
 sample_packing: false
@@ -32,22 +34,20 @@ micro_batch_size: 1
 gradient_accumulation_steps: 8
 eval_batch_size: 1
 
-# Training Settings
+# ── 학습 설정 ─────────────────────────────────────────────
 max_steps: 20
 learning_rate: 0.0002
-# FSDP와 bitsandbytes paged 옵티마이저는 궁합이 나쁨.
-# adamw_torch_fused가 FSDP2 권장 조합.
 optimizer: adamw_torch_fused
 train_on_inputs: false
 
-# Dataset Settings
+# ── 데이터셋 설정 ─────────────────────────────────────────
 datasets:
   - path: synthetic
     type: _synthetic
     length: 320
     sequence_length: 20480
 
-# ── Checkpointing ────────────────────────────────────────
+# ── 체크포인팅 ────────────────────────────────────────────
 # ★ FSDP 사용 시 HF 쪽 gradient_checkpointing은 반드시 끈다
 #   (활성화하면 backward에서 redundant AllGather 발생)
 gradient_checkpointing: false
@@ -55,17 +55,8 @@ gradient_checkpointing: false
 # ── FSDP2 설정 ────────────────────────────────────────────
 fsdp_version: 2
 fsdp_config:
-  # 파라미터/그래디언트/옵티마이저 상태 풀 샤딩 (= FULL_SHARD)
-  reshard_after_forward: true
-
-  # 8B + QLoRA는 48GB x 2에서 충분하므로 CPU offload 불필요
-  offload_params: false
-
   # ★ FSDP 네이티브 activation checkpointing 사용 (중복 AllGather 제거)
   activation_checkpointing: true
-
-  # ★ 로컬 디스크에서 8B 모델을 병렬 로드 — rank 0 직렬 broadcast 회피
-  cpu_ram_efficient_loading: false
 
   # Llama decoder block 단위로 래핑
   auto_wrap_policy: TRANSFORMER_BASED_WRAP
