@@ -36,7 +36,7 @@ case "${LAUNCH_MODE}" in
     single)
         :
         ;;
-    ddp|fsdp)
+    fsdp)
         EXTRA_FLAGS="--multi_gpu"
         ;;
     *)

@@ -4,12 +4,11 @@ set -e
 # ── 사용법 ────────────────────────────────────────────────
 usage() {
     cat <<EOF
-사용법: $0 {mig48|single48|single96|ddp48|fsdp48}
+사용법: $0 {mig48|single48|single96|fsdp48}
 
   mig48    - 96GB GPU를 MIG로 2개로 쪼갠 후 48GB MIG 인스턴스에서 학습
   single48 - 단일 48GB GPU에서 학습
   single96 - 단일 96GB GPU에서 학습
-  ddp48    - 2x 48GB GPU에서 학습 (DDP)
   fsdp48   - 2x 48GB GPU에서 학습 (FSDP2 + QLoRA)
 EOF
     exit 1
@@ -40,13 +39,6 @@ case "${BENCHMARK_TYPE}" in
         GPU_MODE="single"
         LAUNCH_MODE="single"
         DESC="단일 96GB GPU"
-        ;;
-    ddp48)
-        CONFIG_FILE="48gb_ddp.yml"
-        NUM_PROCESSES=2
-        GPU_MODE="dual"
-        LAUNCH_MODE="ddp"
-        DESC="2x 48GB GPU (DDP)"
         ;;
     fsdp48)
         CONFIG_FILE="48gb_fsdp.yml"

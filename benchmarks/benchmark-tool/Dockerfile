@@ -65,7 +65,6 @@ RUN pip install \
 # ── 설정 파일 복사 ─────────────────────────────────────────
 COPY 48gb_single.yml /workspace/48gb_single.yml
 COPY 96gb_single.yml /workspace/96gb_single.yml
-COPY 48gb_ddp.yml    /workspace/48gb_ddp.yml
 COPY 48gb_fsdp.yml   /workspace/48gb_fsdp.yml
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
