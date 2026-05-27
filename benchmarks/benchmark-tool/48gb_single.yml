@@ -5,6 +5,7 @@ special_tokens:
   pad_token: "<|end_of_text|>"
 dataset_prepared_path: /workspace/cache/48gb_cache
 output_dir: /workspace/final-result/48gb/out-expensive-48gb-v1
+seed: 100
 
 # ── 모델 로드 및 어댑터 설정 ──────────────────────────────
 adapter: qlora
@@ -21,7 +22,7 @@ lora_mlp_kernel: false
 lora_embedding_kernel: false
 
 # ── LoRA 설정 ─────────────────────────────────────────────
-lora_r: 32
+lora_r: 64
 lora_alpha: 16
 lora_dropout: 0.05
 lora_target_linear: true
@@ -39,6 +40,7 @@ max_steps: 20
 learning_rate: 0.0002
 optimizer: adamw_torch_fused
 train_on_inputs: false
+max_grad_norm: 1.0
 
 # ── 데이터셋 설정 ─────────────────────────────────────────
 datasets:
